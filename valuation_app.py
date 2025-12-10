@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import requests
 
-# Configuration de la page
-st.set_page_config(page_title="Fair Value Finder", layout="wide")
+# Configuration de la page avec le nouveau nom de domaine
+st.set_page_config(page_title="TrueStockPrice.com", layout="wide", page_icon="💰")
 
 # --- GESTION DES LANGUES (INTERNATIONALISATION) ---
 lang_option = st.sidebar.selectbox(
@@ -15,16 +15,16 @@ lang_option = st.sidebar.selectbox(
     index=0
 )
 
-# Dictionnaire de textes (Nettoyé pour l'affichage)
+# Dictionnaire de textes (Marque mise à jour)
 TRANS = {
     "Français 🇫🇷": {
         "disclaimer_title": "⚠️ AVERTISSEMENT IMPORTANT",
         "disclaimer_text": """
 <strong>CECI N'EST PAS UN CONSEIL EN INVESTISSEMENT.</strong><br><br>
-Les résultats sont générés à titre <strong>éducatif</strong>. Investir comporte des risques de perte en capital.
+Les résultats fournis par <strong>TrueStockPrice.com</strong> sont générés à titre <strong>éducatif</strong>. Investir comporte des risques.
 Faites vos propres recherches. L'éditeur décline toute responsabilité.""",
-        "main_title": "💰 Fair Value Finder",
-        "subtitle": "Estimez la juste valeur de vos actions et optimisez vos investissements.",
+        "main_title": "💰 TrueStockPrice.com",
+        "subtitle": "La vérité sur le prix des actions. Analysez, Valorisez, Investissez.",
         "sb_search": "1. Recherche",
         "sb_search_help": "Tapez le nom d'une entreprise (ex: L'Oréal) ci-dessous pour trouver son symbole.",
         "sb_ticker": "Symbole Sélectionné",
@@ -34,13 +34,13 @@ Faites vos propres recherches. L'éditeur décline toute responsabilité.""",
         "sb_settings": "3. Pilotage Hypothèses",
         "sb_override": "Activer le Mode Manuel",
         "ad_broker_title": "Courtier Recommandé",
-        "ad_broker_desc": "Investissez avec des frais réduits.",
-        "ad_broker_btn": "Ouvrir un compte →",
+        "ad_broker_desc": "Arrêtez de payer des frais inutiles.",
+        "ad_broker_btn": "Voir l'offre Spéciale →",
         "res_market_price": "Prix Marché",
-        "res_fair_value": "Juste Valeur",
-        "res_undervalued": "SOUS-ÉVALUÉ (Achat)",
-        "res_overvalued": "SUR-ÉVALUÉ (Vente)",
-        "res_fair": "JUSTE PRIX (Hold)",
+        "res_fair_value": "Vraie Valeur (TruePrice)",
+        "res_undervalued": "SOUS-ÉVALUÉ (Opportunité)",
+        "res_overvalued": "SUR-ÉVALUÉ (Trop cher)",
+        "res_fair": "JUSTE PRIX (Correct)",
         "res_safety": "Prix cible sûr :",
         "tab_synth": "📊 Synthèse Stratégique",
         "tab_fin": "🧮 Détails Financiers",
@@ -52,7 +52,7 @@ Faites vos propres recherches. L'éditeur décline toute responsabilité.""",
         "desc_company": "📝 Description de l'entreprise",
         "analysis_complete": "Analyse terminée pour",
         "err_data": "Données insuffisantes ou flux négatifs.",
-        "loading": "Analyse complète en cours...",
+        "loading": "TrueStockPrice analyse les données...",
         "search_placeholder": "Rechercher une entreprise (ex: Nvidia)...",
         "search_label": "🔍 Trouver un symbole",
         "found_msg": "Résultats trouvés :"
@@ -61,10 +61,10 @@ Faites vos propres recherches. L'éditeur décline toute responsabilité.""",
         "disclaimer_title": "⚠️ IMPORTANT DISCLAIMER",
         "disclaimer_text": """
 <strong>THIS IS NOT INVESTMENT ADVICE.</strong><br><br>
-Results are generated for <strong>educational purposes only</strong>. Investing involves risk of loss.
-Do your own due diligence. The publisher assumes no responsibility for use of this information.""",
-        "main_title": "💰 Fair Value Finder",
-        "subtitle": "Estimate the intrinsic value of stocks and optimize your investments.",
+Results provided by <strong>TrueStockPrice.com</strong> are for <strong>educational purposes only</strong>. Investing involves risk.
+Do your own due diligence. The publisher assumes no responsibility.""",
+        "main_title": "💰 TrueStockPrice.com",
+        "subtitle": "The truth about stock prices. Analyze, Valuate, Invest.",
         "sb_search": "1. Research",
         "sb_search_help": "Type a company name below to find its ticker symbol.",
         "sb_ticker": "Selected Ticker",
@@ -74,13 +74,13 @@ Do your own due diligence. The publisher assumes no responsibility for use of th
         "sb_settings": "3. Assumptions Control",
         "sb_override": "Enable Manual Override",
         "ad_broker_title": "Recommended Broker",
-        "ad_broker_desc": "Invest with low fees today.",
-        "ad_broker_btn": "Open Account →",
+        "ad_broker_desc": "Stop paying unnecessary fees.",
+        "ad_broker_btn": "See Special Offer →",
         "res_market_price": "Market Price",
-        "res_fair_value": "Fair Value",
-        "res_undervalued": "UNDERVALUED (Buy)",
-        "res_overvalued": "OVERVALUED (Sell)",
-        "res_fair": "FAIR PRICE (Hold)",
+        "res_fair_value": "True Value",
+        "res_undervalued": "UNDERVALUED (Opportunity)",
+        "res_overvalued": "OVERVALUED (Expensive)",
+        "res_fair": "FAIR PRICE (Correct)",
         "res_safety": "Safe buy price:",
         "tab_synth": "📊 Strategy Summary",
         "tab_fin": "🧮 Financial Details",
@@ -92,7 +92,7 @@ Do your own due diligence. The publisher assumes no responsibility for use of th
         "desc_company": "📝 Company Description",
         "analysis_complete": "Analysis complete for",
         "err_data": "Insufficient data or negative cash flows.",
-        "loading": "Running full analysis...",
+        "loading": "TrueStockPrice is analyzing...",
         "search_placeholder": "Search company (e.g. Nvidia)...",
         "search_label": "🔍 Find Symbol",
         "found_msg": "Found results:"
@@ -104,7 +104,6 @@ T = TRANS[lang_option]
 
 # --- DISCLAIMER LÉGAL (PROTECTION) ---
 def show_legal_disclaimer():
-    # Utilisation de markdown directement pour un meilleur rendu du gras
     st.warning(T['disclaimer_title'])
     st.markdown(f"<div style='background-color: #fff3cd; padding: 10px; border-radius: 5px; color: #856404; font-size: 0.9em;'>{T['disclaimer_text']}</div>", unsafe_allow_html=True)
 
@@ -137,17 +136,15 @@ with st.sidebar.expander(T['search_label'], expanded=True):
         results = search_symbol(search_query)
         if results:
             st.caption(T['found_msg'])
-            # Création d'un dictionnaire pour l'affichage
             options = {f"{r['symbol']} - {r.get('shortname', r.get('longname', 'N/A'))} ({r.get('exchange', 'N/A')})": r['symbol'] for r in results}
             selected_option = st.radio("Sélectionner :", list(options.keys()), label_visibility="collapsed")
             
-            # Mise à jour du ticker input via le choix
             if selected_option:
                 st.session_state['ticker_input'] = options[selected_option]
         else:
             st.caption("Aucun résultat trouvé.")
 
-# Input principal (connecté au moteur de recherche)
+# Input principal
 if 'ticker_input' not in st.session_state:
     st.session_state['ticker_input'] = "TSLA"
 
@@ -170,10 +167,11 @@ enable_override = st.sidebar.checkbox(T['sb_override'])
 # --- SYSTÈME DE PUBLICITÉ (ADSENSE) ---
 def show_adsense_sidebar():
     st.sidebar.markdown("---")
-    st.sidebar.caption("Ad / Publicité")
+    st.sidebar.caption("Publicité")
+    # Note : Le code ci-dessous est un placeholder.
+    # Une fois votre domaine validé par Google, remplacez les "ca-pub-XXXXXXXXXXXXXXXX" par vos vrais IDs.
     adsense_code = """
     <div style="text-align: center; width: 100%;">
-        <!-- Remplacer les XXXXXX par vos IDs -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
              crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
@@ -186,7 +184,7 @@ def show_adsense_sidebar():
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
         <div style="background: #f1f5f9; border: 2px dashed #cbd5e1; color: #64748b; padding: 20px 10px; border-radius: 8px; font-size: 11px;">
-            Google AdSense<br>(Visible online)
+            Espace Pub Google<br>(Visible sur TrueStockPrice.com)
         </div>
     </div>
     """
@@ -194,7 +192,7 @@ def show_adsense_sidebar():
 
 def show_adsense_banner():
     st.markdown("---")
-    st.caption("Ad / Publicité")
+    st.caption("Publicité")
     adsense_code = """
     <div style="text-align: center; width: 100%;">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
@@ -209,16 +207,19 @@ def show_adsense_banner():
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
         <div style="background: #f8fafc; border: 2px dashed #94a3b8; color: #475569; padding: 20px; border-radius: 8px;">
-            Google AdSense Banner<br><span style="font-size: 12px;">(Visible online)</span>
+            Bannière Google AdSense<br><span style="font-size: 12px;">(Visible sur TrueStockPrice.com)</span>
         </div>
     </div>
     """
     components.html(adsense_code, height=150)
 
-# --- SYSTÈME D'AFFILIATION ---
+# --- SYSTÈME D'AFFILIATION (MONÉTISATION) ---
 def show_affiliate_sidebar():
     st.sidebar.markdown("---")
     st.sidebar.markdown(f"### 🏆 {T['ad_broker_title']}")
+    
+    # LIEN D'AFFILIATION A REMPLACER ICI
+    affiliate_link = "https://www.traderepublic.com" # Remplacez par votre vrai lien !
     
     html_card = f"""
     <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
@@ -230,7 +231,7 @@ def show_affiliate_sidebar():
             <span style="font-size: 11px; font-weight: 700; color: #166534;">🎁 BONUS: 1 Action / Stock*</span>
         </div>
         
-        <a href="#" target="_blank" style="display: block; width: 100%; background-color: #111827; color: white; text-align: center; padding: 10px 0; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s;">
+        <a href="{affiliate_link}" target="_blank" style="display: block; width: 100%; background-color: #111827; color: white; text-align: center; padding: 10px 0; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s;">
             {T['ad_broker_btn']}
         </a>
     </div>
@@ -241,8 +242,13 @@ def show_contextual_buttons(ticker):
     st.markdown("### 🛒 Action / Trade")
     c1, c2, c3 = st.columns(3)
     
+    # LIENS D'AFFILIATION A REMPLACER ICI
+    link_etoro = f"https://www.etoro.com/markets/{ticker.replace('.PA', '')}" # Ajouter ?ref=...
+    link_ibkr = "https://www.interactivebrokers.com" # Votre lien partenaire
+    link_tradingview = "https://fr.tradingview.com/" # Votre lien partenaire
+    
     c1.markdown(f"""
-    <a href="https://www.etoro.com/markets/{ticker.replace('.PA', '')}" target="_blank" style="text-decoration: none;">
+    <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
         <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white; hover: bg-gray-50;">
             <span style="font-weight: bold; color: #16a34a;">eToro</span><br>
             <span style="font-size: 12px; color: #4b5563;">Buy {ticker} (0% Comm)</span>
@@ -251,7 +257,7 @@ def show_contextual_buttons(ticker):
     """, unsafe_allow_html=True)
     
     c2.markdown(f"""
-    <a href="#" target="_blank" style="text-decoration: none;">
+    <a href="{link_ibkr}" target="_blank" style="text-decoration: none;">
         <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
             <span style="font-weight: bold; color: #ea580c;">Interactive Brokers</span><br>
             <span style="font-size: 12px; color: #4b5563;">Buy {ticker} (Pro)</span>
@@ -260,7 +266,7 @@ def show_contextual_buttons(ticker):
     """, unsafe_allow_html=True)
 
     c3.markdown(f"""
-    <a href="#" target="_blank" style="text-decoration: none;">
+    <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
         <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
             <span style="font-weight: bold; color: #2563eb;">TradingView</span><br>
             <span style="font-size: 12px; color: #4b5563;">Advanced Chart</span>
@@ -617,4 +623,4 @@ if launch_btn or st.session_state.get('data_loaded', False):
         else:
             st.error(T['err_data'])
             
-show_adsense_banner() 
+show_adsense_banner()
