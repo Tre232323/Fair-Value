@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import requests
 
-# Configuration de la page avec le nouveau nom de domaine
-st.set_page_config(page_title="TrueStockPrice.com", layout="wide", page_icon="💰")
+# Configuration de la page avec le nouveau nom de marque
+st.set_page_config(page_title="True Stock Price", layout="wide", page_icon="💰")
 
 # --- GESTION DES LANGUES (INTERNATIONALISATION) ---
 lang_option = st.sidebar.selectbox(
@@ -15,15 +15,15 @@ lang_option = st.sidebar.selectbox(
     index=0
 )
 
-# Dictionnaire de textes (Marque mise à jour)
+# Dictionnaire de textes (Marque mise à jour sans .com)
 TRANS = {
     "Français 🇫🇷": {
         "disclaimer_title": "⚠️ AVERTISSEMENT IMPORTANT",
         "disclaimer_text": """
 <strong>CECI N'EST PAS UN CONSEIL EN INVESTISSEMENT.</strong><br><br>
-Les résultats fournis par <strong>TrueStockPrice.com</strong> sont générés à titre <strong>éducatif</strong>. Investir comporte des risques.
+Les résultats fournis par <strong>True Stock Price</strong> sont générés à titre <strong>éducatif</strong>. Investir comporte des risques.
 Faites vos propres recherches. L'éditeur décline toute responsabilité.""",
-        "main_title": "💰 TrueStockPrice.com",
+        "main_title": "💰 True Stock Price",
         "subtitle": "La vérité sur le prix des actions. Analysez, Valorisez, Investissez.",
         "sb_search": "1. Recherche",
         "sb_search_help": "Tapez le nom d'une entreprise (ex: L'Oréal) ci-dessous pour trouver son symbole.",
@@ -52,7 +52,7 @@ Faites vos propres recherches. L'éditeur décline toute responsabilité.""",
         "desc_company": "📝 Description de l'entreprise",
         "analysis_complete": "Analyse terminée pour",
         "err_data": "Données insuffisantes ou flux négatifs.",
-        "loading": "TrueStockPrice analyse les données...",
+        "loading": "True Stock Price analyse les données...",
         "search_placeholder": "Rechercher une entreprise (ex: Nvidia)...",
         "search_label": "🔍 Trouver un symbole",
         "found_msg": "Résultats trouvés :"
@@ -61,9 +61,9 @@ Faites vos propres recherches. L'éditeur décline toute responsabilité.""",
         "disclaimer_title": "⚠️ IMPORTANT DISCLAIMER",
         "disclaimer_text": """
 <strong>THIS IS NOT INVESTMENT ADVICE.</strong><br><br>
-Results provided by <strong>TrueStockPrice.com</strong> are for <strong>educational purposes only</strong>. Investing involves risk.
+Results provided by <strong>True Stock Price</strong> are for <strong>educational purposes only</strong>. Investing involves risk.
 Do your own due diligence. The publisher assumes no responsibility.""",
-        "main_title": "💰 TrueStockPrice.com",
+        "main_title": "💰 True Stock Price",
         "subtitle": "The truth about stock prices. Analyze, Valuate, Invest.",
         "sb_search": "1. Research",
         "sb_search_help": "Type a company name below to find its ticker symbol.",
@@ -92,7 +92,7 @@ Do your own due diligence. The publisher assumes no responsibility.""",
         "desc_company": "📝 Company Description",
         "analysis_complete": "Analysis complete for",
         "err_data": "Insufficient data or negative cash flows.",
-        "loading": "TrueStockPrice is analyzing...",
+        "loading": "True Stock Price is analyzing...",
         "search_placeholder": "Search company (e.g. Nvidia)...",
         "search_label": "🔍 Find Symbol",
         "found_msg": "Found results:"
@@ -184,7 +184,7 @@ def show_adsense_sidebar():
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
         <div style="background: #f1f5f9; border: 2px dashed #cbd5e1; color: #64748b; padding: 20px 10px; border-radius: 8px; font-size: 11px;">
-            Espace Pub Google<br>(Visible sur TrueStockPrice.com)
+            Espace Pub Google<br>(Visible sur True Stock Price)
         </div>
     </div>
     """
@@ -207,7 +207,7 @@ def show_adsense_banner():
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
         <div style="background: #f8fafc; border: 2px dashed #94a3b8; color: #475569; padding: 20px; border-radius: 8px;">
-            Bannière Google AdSense<br><span style="font-size: 12px;">(Visible sur TrueStockPrice.com)</span>
+            Bannière Google AdSense<br><span style="font-size: 12px;">(Visible sur True Stock Price)</span>
         </div>
     </div>
     """
