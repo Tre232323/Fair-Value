@@ -11,7 +11,7 @@ st.set_page_config(page_title="Fair Value Finder", layout="wide")
 # --- GESTION DES LANGUES (INTERNATIONALISATION) ---
 lang_option = st.sidebar.selectbox(
     "🌍 Language / Langue",
-    ["Français 🇫🇷", "English 🇺🇸"],
+    ["English 🇺🇸", "Français 🇫🇷"],
     index=0
 )
 
@@ -617,4 +617,4 @@ if launch_btn or st.session_state.get('data_loaded', False):
         else:
             st.error(T['err_data'])
             
-show_adsense_banner()
+show_adsense_banner() 
