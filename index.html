@@ -4,13 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>True Stock Price - Fair Value Finder</title>
-	
-    <!-- Solution FINALE pour le domaine: Redirection HTML immédiate -->
-    <!-- Le CNAME Namecheap vers GitHub reste, mais cette page renvoie vers Streamlit -->
-    <meta http-equiv="refresh" content="0; url=https://truestockprice.streamlit.app/">
-
+	<style type="text/css">
+		/* Règle HTML/BODY très agressive pour éliminer les marges et l'espace par défaut */
+		html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Empêche les barres de défilement de l'hôte */
+		}
+		
+		/* Règle spécifique à l'iFrame pour couvrir la totalité du viewport et supprimer toute bordure */
+		iframe {
+			display: block;
+			position: absolute; 
+			top: 0;
+			left: 0;
+			width: 100vw; /* 100% de la largeur du viewport */
+			height: 100vh; /* 100% de la hauteur du viewport */
+			
+			/* Suppression maximale des bordures et marges */
+			border: 0 !important;
+			border-width: 0 !important;
+			margin: 0 !important;
+			padding: 0 !important;
+		}
+	</style>
 </head>
 <body>
-	<p>Redirection en cours vers l'application Streamlit...</p>
+	<!-- Retour à l'iFrame pour maintenir l'URL du domaine personnalisé. 
+	     Le paramètre ?embed=true est utilisé pour que le CSS masquant les barres Streamlit fonctionne. -->
+	<iframe src="https://truestockprice.streamlit.app/?embed=true">
+</iframe>
 </body>
 </html>
