@@ -5,15 +5,18 @@ import pandas as pd
 import numpy as np
 import requests
 
-# --- INJECTION DU CODE ADSENSE GLOBAL (POUR LA VALIDATION) ---
-# Ce code est injecté en haut de page (simule le <head>) pour la vérification du site par Google.
+# --- INJECTION DU CODE ADSENSE GLOBAL & BALISES DE VÉRIFICATION ---
+# Ce code est injecté en haut de page (simule le <head>) pour la vérification du site par Google et la plateforme partenaire.
 def inject_adsense_head():
-    # VOUS DEVEVEZ UTILISER VOTRE CODE GLOBAL ADSENSE ICI
     adsense_verification_script = """
-    <!-- Code Global AdSense : Ce script est indispensable pour la validation du site par Google. -->
+    <!-- Code Global AdSense (Validation Google) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
          crossorigin="anonymous"></script>
-    <div style="display:none;">AdSense Verification Tag</div>
+    
+    <!-- Balise de Vérification IMPACT SITE (Affiliation/Partenariat) -->
+    <meta name='impact-site-verification' value='50d9a746-1376-4819-9331-960b659a868b'>
+    
+    <div style="display:none;">Verification Tags Holder</div>
     """
     components.html(adsense_verification_script, height=0, width=0)
 
@@ -101,13 +104,13 @@ Do your own due diligence. The publisher assumes no responsibility.""",
         "sig_tech": "Technical Signal:",
         "sig_buy": "GREEN LIGHT",
         "sig_sell": "RED LIGHT",
-        "sig_neutral": "NEUTRAL",
+        "sig_neutral": "NEUTRE",
         "desc_company": "📝 Company Description",
         "analysis_complete": "Analysis complete for",
         "err_data": "Insufficient data or negative cash flows.",
         "loading": "True Stock Price is analyzing...",
         "search_placeholder": "Search company (e.g. Nvidia)...",
-        "search_label": "🔍 Find Symbol",
+        "search_label": "🔍 Trouver un symbole",
         "found_msg": "Found results:"
     }
 }
@@ -229,7 +232,7 @@ def show_affiliate_sidebar():
     st.sidebar.markdown("---")
     st.sidebar.markdown(f"### 🏆 {T['ad_broker_title']}")
     
-    # [LIEN 1 : TRADE REPUBLIC] VOTRE CODE EST INTEGRE ICI
+    # [LIEN 1 : TRADE REPUBLIC] MODIFIEZ CE LIEN PAR VOTRE LIEN PARTENAIRE TRADE REPUBLIC
     affiliate_link = "https://traderepublic.com/?ref=TR_BEST_OFFER" 
     
     html_card = f"""
