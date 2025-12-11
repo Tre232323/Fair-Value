@@ -10,7 +10,7 @@ import requests
 def inject_adsense_head():
     full_injection_script = """
     <!-- Code Global AdSense (Validation Google) -->
-    <script async src="https://pagead2.googysyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
          crossorigin="anonymous"></script>
     
     <!-- Balise de Vérification IMPACT SITE (Affiliation/Partenariat) -->
@@ -19,7 +19,7 @@ def inject_adsense_head():
     <!-- CSS pour masquer la barre 'Built with Streamlit' et les boutons de contrôle -->
     <style>
         /* Masque le menu principal (trois points) */
-        #MainMenu {visibility: hidden;} 
+        #MainMenu {visibility: hidden !important;} 
         
         /* Masque le pied de page 'Built with Streamlit' (Solution la plus robuste) */
         footer {
@@ -28,31 +28,25 @@ def inject_adsense_head():
             height: 0px !important;
         } 
         
-        /* Masque l'en-tête, souvent vide (incluant les boutons de partage/déploiement si présents) */
-        header {visibility: hidden;} 
+        /* Masque l'en-tête */
+        header {visibility: hidden !important;} 
+
+        /* Solution la plus fiable pour masquer la barre flottante Plein Écran/Partage */
+        [data-testid="stToolbar"] {
+            visibility: hidden !important;
+            display: none !important;
+        }
         
-        /* Masque le widget de statut Streamlit (où le texte est souvent inséré) */
+        /* Masque le widget de statut Streamlit (où le texte est souvent inséré, y compris le fullscreen) */
         [data-testid="stStatusWidget"] {
             display: none !important;
         }
         
-        /* Masque les boutons d'action flottants (inclut le bouton plein écran en bas à droite) */
+        /* Masque les boutons d'action flottants (y compris le bouton plein écran en bas à droite) */
         [data-testid="stActionButton"] {
             display: none !important;
         }
-        
-        /* NOUVEAU: Cible le conteneur principal de la barre de statut (pleine écran et 'Built with Streamlit') */
-        .st-emotion-cache-1e5z8l4 { 
-            display: none !important;
-        }
-        
-        /* NOUVEAU: Cible les conteneurs d'éléments spécifiques de l'interface utilisateur */
-        .st-emotion-cache-1f1kdxj { /* Conteneur de l'icône de partage/menu */
-            display: none !important;
-        }
-        
-        /* Tentative de ciblage de classes spécifiques (moins stable, mais on garde) */
-        .st-emotion-cache-1cypcdb, .st-emotion-cache-cio0e1 {visibility: hidden !important;} 
+
     </style>
     
     <div style="display:none;">Verification Tags Holder</div>
