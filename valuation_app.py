@@ -5,10 +5,10 @@ import pandas as pd
 import numpy as np
 import requests
 
-# --- INJECTION DU CODE ADSENSE GLOBAL & BALISES DE VÉRIFICATION ---
-# Ce code est injecté en haut de page (simule le <head>) pour la vérification du site par Google et la plateforme partenaire.
+# --- INJECTION DU CODE ADSENSE GLOBAL, BALISES & STYLES ---
+# Ce code est injecté en haut de page (simule le <head>) pour la vérification du site et pour masquer le pied de page Streamlit.
 def inject_adsense_head():
-    adsense_verification_script = """
+    full_injection_script = """
     <!-- Code Global AdSense (Validation Google) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
          crossorigin="anonymous"></script>
@@ -16,9 +16,14 @@ def inject_adsense_head():
     <!-- Balise de Vérification IMPACT SITE (Affiliation/Partenariat) -->
     <meta name='impact-site-verification' value='50d9a746-1376-4819-9331-960b659a868b'>
     
+    <!-- CSS pour masquer le pied de page 'Built with Streamlit' -->
+    <style>
+        footer {visibility: hidden;}
+    </style>
+    
     <div style="display:none;">Verification Tags Holder</div>
     """
-    components.html(adsense_verification_script, height=0, width=0)
+    components.html(full_injection_script, height=0, width=0)
 
 # Configuration de la page avec le nouveau nom de marque
 st.set_page_config(page_title="True Stock Price", layout="wide", page_icon="💰")
@@ -228,7 +233,6 @@ def show_adsense_banner():
     components.html(adsense_code, height=150)
 
 # --- SYSTÈME D'AFFILIATION (MONÉTISATION) ---
-# J'enlève la fonction show_affiliate_sidebar pour l'instant
 
 def show_contextual_buttons(ticker):
     st.markdown("### 🛒 Action / Trade")
@@ -251,8 +255,8 @@ def show_contextual_buttons(ticker):
     """, unsafe_allow_html=True)
 
 
-# J'enlève l'appel à show_affiliate_sidebar()
-# show_adsense_sidebar() # L'appel à la pub AdSense reste dans la sidebar
+# L'appel à show_affiliate_sidebar est retiré
+show_adsense_sidebar() # L'appel à la pub AdSense reste dans la sidebar
 
 # --- MOTEUR INTELLIGENT (Fondamental) ---
 
