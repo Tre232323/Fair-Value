@@ -279,30 +279,34 @@ def show_contextual_buttons(ticker):
     </svg>
     """
     
-    with c1:
-        st.markdown(f"""
-        <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
-            <div style="border: 2px solid #a7f3d0; border-radius: 8px; padding: 15px; text-align: center; background: #ecfdf5; hover: bg-gray-50; display: flex; flex-direction: column; align-items: center;">
-                {etoro_icon_svg}
-                <span style="font-weight: bold; color: #065f46; margin-top: 5px;">eToro</span>
-                <span style="font-size: 12px; color: #10B981;">Buy {ticker} (0% Comm)</span>
-            </div>
-        </a>
-        """, unsafe_allow_html=True)
+    # Construction du HTML du bouton eToro
+    etoro_html = f"""
+    <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
+        <div style="border: 2px solid #a7f3d0; border-radius: 8px; padding: 15px; text-align: center; background: #ecfdf5; hover: bg-gray-50; display: flex; flex-direction: column; align-items: center;">
+            {etoro_icon_svg}
+            <span style="font-weight: bold; color: #065f46; margin-top: 5px;">eToro</span>
+            <span style="font-size: 12px; color: #10B981;">Commencez à trader avec 0% de commission!</span>
+        </div>
+    </a>
+    """
     
-    # L'ancienne colonne c2 (IBKR) est supprimée
+    # Construction du HTML du bouton TradingView
+    tv_html = f"""
+    <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
+        <div style="border: 2px solid #60a5fa; border-radius: 8px; padding: 15px; text-align: center; background: #eff6ff; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); display: flex; flex-direction: column; align-items: center;">
+            {tv_icon_svg}
+            <span style="font-weight: bold; color: #1e40af; margin-top: 5px;">TradingView</span>
+            <span style="font-size: 12px; color: #2563eb;">Accès Premium GRATUIT 30 Jours</span>
+        </div>
+    </a>
+    """
+    
+    with c1:
+        st.markdown(etoro_html, unsafe_allow_html=True)
     
     with c2:
-        # Bloc TradingView mis en évidence
-        st.markdown(f"""
-        <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
-            <div style="border: 2px solid #60a5fa; border-radius: 8px; padding: 15px; text-align: center; background: #eff6ff; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); display: flex; flex-direction: column; align-items: center;">
-                {tv_icon_svg}
-                <span style="font-weight: bold; color: #1e40af; margin-top: 5px;">TradingView</span>
-                <span style="font-size: 12px; color: #2563eb;">Analyse Graphique</span>
-            </div>
-        </a>
-        """, unsafe_allow_html=True)
+        st.markdown(tv_html, unsafe_allow_html=True)
+
 
 # Affichage des pubs sidebar
 show_affiliate_sidebar()
