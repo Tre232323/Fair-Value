@@ -5,35 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>True Stock Price - Fair Value Finder</title>
 	<style type="text/css">
-		html {
-			overflow: auto;
-		}  		
-		html,
-		body,
-		div,
-		iframe {
-			margin: 0px;
-			padding: 0px;
-			height: 100%;
-			border: none;
-		}	
+		/* Règle HTML/BODY aggressive pour éliminer les marges et l'espace */
+		html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Empêche les barres de défilement de l'hôte */
+		}
+		
+		/* Règle spécifique à l'iFrame pour couvrir la totalité du viewport */
 		iframe {
 			display: block;
-			width: 100%;
+			position: absolute; /* Force le positionnement sans marge */
+			top: 0;
+			left: 0;
+			width: 100vw; /* Couvre 100% de la largeur du viewport */
+			height: 100vh; /* Couvre 100% de la hauteur du viewport */
 			border: none;
-			overflow-y: auto;
-			overflow-x: hidden;
+			margin: 0;
+			padding: 0;
 		}
 	</style>
 </head>
 <body>
 	<!-- Assurez-vous que le paramètre embed=true est ajouté pour éviter les problèmes de redirection Streamlit. -->
-	<iframe src="https://truestockprice.streamlit.app/?embed=true" 
+	<iframe src="https://truestockprice.streamlit.app/?embed=true"
 			frameborder="0"
 			marginheight="0"
 			marginwidth="0"
-			width="100%"
-			height="100%"
 			scrolling="auto">
 </iframe>
 </body>
