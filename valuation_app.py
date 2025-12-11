@@ -25,6 +25,7 @@ def inject_adsense_head():
         footer {
             visibility: hidden !important;
             display: none !important;
+            height: 0px !important;
         } 
         
         /* Masque l'en-tête, souvent vide (incluant les boutons de partage/déploiement si présents) */
@@ -39,7 +40,17 @@ def inject_adsense_head():
         [data-testid="stActionButton"] {
             display: none !important;
         }
-
+        
+        /* NOUVEAU: Cible le conteneur principal de la barre de statut (pleine écran et 'Built with Streamlit') */
+        .st-emotion-cache-1e5z8l4 { 
+            display: none !important;
+        }
+        
+        /* NOUVEAU: Cible les conteneurs d'éléments spécifiques de l'interface utilisateur */
+        .st-emotion-cache-1f1kdxj { /* Conteneur de l'icône de partage/menu */
+            display: none !important;
+        }
+        
         /* Tentative de ciblage de classes spécifiques (moins stable, mais on garde) */
         .st-emotion-cache-1cypcdb, .st-emotion-cache-cio0e1 {visibility: hidden !important;} 
     </style>
