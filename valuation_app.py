@@ -10,34 +10,38 @@ import requests
 def inject_adsense_head():
     full_injection_script = """
     <!-- Code Global AdSense (Validation Google) -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
+    <script async src="https://pagead2.googysyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
          crossorigin="anonymous"></script>
     
     <!-- Balise de Vérification IMPACT SITE (Affiliation/Partenariat) -->
     <meta name='impact-site-verification' value='50d9a746-1376-4819-9331-960b659a868b'>
     
-    <!-- CSS pour masquer la barre 'Built with Streamlit' (Solution plus agressive) -->
+    <!-- CSS pour masquer la barre 'Built with Streamlit' et les boutons de contrôle -->
     <style>
-        #MainMenu {visibility: hidden;} /* Cache le bouton de menu Streamlit */
-        footer {visibility: hidden;} /* Cache le pied de page général */
-        header {visibility: hidden;} /* Cache l'en-tête, souvent vide */
-        .st-emotion-cache-1cypcdb {visibility: hidden;} /* Cache la barre latérale spécifique */
-        .st-emotion-cache-cio0e1 {visibility: hidden;} /* Cache la barre latérale spécifique (variation) */
+        /* Masque le menu principal (trois points) */
+        #MainMenu {visibility: hidden;} 
         
-        /* Cible l'élément spécifique du pied de page Streamlit pour le retirer */
-        .st-emotion-cache-h5rgay > p:contains("Streamlit") {
+        /* Masque le pied de page 'Built with Streamlit' (Solution la plus robuste) */
+        footer {
+            visibility: hidden !important;
             display: none !important;
-        }
+        } 
         
-        /* Cible la barre spécifique qui contient "Made with Streamlit" */
+        /* Masque l'en-tête, souvent vide (incluant les boutons de partage/déploiement si présents) */
+        header {visibility: hidden;} 
+        
+        /* Masque le widget de statut Streamlit (où le texte est souvent inséré) */
         [data-testid="stStatusWidget"] {
             display: none !important;
         }
-        /* Cache le bouton 'Déployer' ou 'Share' qui peut apparaître */
-        button[data-testid="baseButton-secondary"] {
+        
+        /* Masque les boutons d'action flottants (inclut le bouton plein écran en bas à droite) */
+        [data-testid="stActionButton"] {
             display: none !important;
         }
 
+        /* Tentative de ciblage de classes spécifiques (moins stable, mais on garde) */
+        .st-emotion-cache-1cypcdb, .st-emotion-cache-cio0e1 {visibility: hidden !important;} 
     </style>
     
     <div style="display:none;">Verification Tags Holder</div>
