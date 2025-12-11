@@ -104,13 +104,13 @@ Do your own due diligence. The publisher assumes no responsibility.""",
         "sig_tech": "Technical Signal:",
         "sig_buy": "GREEN LIGHT",
         "sig_sell": "RED LIGHT",
-        "sig_neutral": "NEUTRE",
+        "sig_neutral": "NEUTRAL",
         "desc_company": "📝 Company Description",
         "analysis_complete": "Analysis complete for",
         "err_data": "Insufficient data or negative cash flows.",
         "loading": "True Stock Price is analyzing...",
         "search_placeholder": "Search company (e.g. Nvidia)...",
-        "search_label": "🔍 Trouver un symbole",
+        "search_label": "🔍 Find Symbol",
         "found_msg": "Found results:"
     }
 }
@@ -254,45 +254,37 @@ def show_affiliate_sidebar():
 
 def show_contextual_buttons(ticker):
     st.markdown("### 🛒 Action / Trade")
-    c1, c2, c3 = st.columns(3)
+    # La colonne c2 a été supprimée, l'espace sera partagé entre c1 et c3
+    c1, c2 = st.columns(2) 
     
     # [LIEN 2 : ETORO] A REMPLACER PAR VOTRE CODE D'AFFILIATION
     # Utilise le ticker dynamique
     link_etoro = f"https://www.etoro.com/markets/{ticker.replace('.PA', '')}?ref=VOTRE_CODE_ETORO" 
     
-    # [LIEN 3 : INTERACTIVE BROKERS (IBKR)] CODE INTEGRE AVEC VOTRE ID edison546
-    # Le lien complet est utilisé pour s'assurer que le parrainage est crédité.
-    link_ibkr = "https://ibkr.com/referral/edison546" 
-    
     # [LIEN 4 : TRADINGVIEW] A REMPLACER PAR VOTRE CODE D'AFFILIATION
     link_tradingview = "https://fr.tradingview.com/?aff=VOTRE_CODE_TV" 
     
-    c1.markdown(f"""
-    <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
-        <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white; hover: bg-gray-50;">
-            <span style="font-weight: bold; color: #16a34a;">eToro</span><br>
-            <span style="font-size: 12px; color: #4b5563;">Buy {ticker} (0% Comm)</span>
-        </div>
-    </a>
-    """, unsafe_allow_html=True)
+    with c1:
+        st.markdown(f"""
+        <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
+            <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white; hover: bg-gray-50;">
+                <span style="font-weight: bold; color: #16a34a;">eToro</span><br>
+                <span style="font-size: 12px; color: #4b5563;">Buy {ticker} (0% Comm)</span>
+            </div>
+        </a>
+        """, unsafe_allow_html=True)
     
-    c2.markdown(f"""
-    <a href="{link_ibkr}" target="_blank" style="text-decoration: none;">
-        <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
-            <span style="font-weight: bold; color: #ea580c;">Interactive Brokers (IBKR)</span><br>
-            <span style="font-size: 12px; color: #4b5563;">Trader {ticker} (Pro)</span>
-        </div>
-    </a>
-    """, unsafe_allow_html=True)
-
-    c3.markdown(f"""
-    <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
-        <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
-            <span style="font-weight: bold; color: #2563eb;">TradingView</span><br>
-            <span style="font-size: 12px; color: #4b5563;">Analyse Graphique</span>
-        </div>
-    </a>
-    """, unsafe_allow_html=True)
+    # L'ancienne colonne c2 (IBKR) est supprimée
+    
+    with c2:
+        st.markdown(f"""
+        <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
+            <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
+                <span style="font-weight: bold; color: #2563eb;">TradingView</span><br>
+                <span style="font-size: 12px; color: #4b5563;">Analyse Graphique</span>
+            </div>
+        </a>
+        """, unsafe_allow_html=True)
 
 # Affichage des pubs sidebar
 show_affiliate_sidebar()
