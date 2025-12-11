@@ -228,89 +228,35 @@ def show_adsense_banner():
     components.html(adsense_code, height=150)
 
 # --- SYSTÈME D'AFFILIATION (MONÉTISATION) ---
-def show_affiliate_sidebar():
-    st.sidebar.markdown("---")
-    st.sidebar.markdown(f"### 🏆 {T['ad_broker_title']}")
-    
-    # [LIEN 1 : TRADE REPUBLIC] MODIFIEZ CE LIEN PAR VOTRE LIEN PARTENAIRE TRADE REPUBLIC
-    affiliate_link = "https://traderepublic.com/?ref=TR_BEST_OFFER" 
-    
-    html_card = f"""
-    <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-        <div style="font-size: 28px; margin-bottom: 8px;">📈</div>
-        <h4 style="margin: 0; color: #0f172a; font-size: 16px; font-weight: 700;'>Trade Republic</h4>
-        <p style="font-size: 12px; color: #64748b; margin: 8px 0 16px 0;">{T['ad_broker_desc']}</p>
-        
-        <div style="background-color: #dcfce7; border: 1px solid #86efac; border-radius: 6px; padding: 6px; margin-bottom: 12px;">
-            <span style="font-size: 11px; font-weight: 700; color: #166534;">🎁 BONUS: 1 Action / Stock*</span>
-        </div>
-        
-        <a href="{affiliate_link}" target="_blank" style="display: block; width: 100%; background-color: #111827; color: white; text-align: center; padding: 10px 0; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; transition: background 0.3s;">
-            {T['ad_broker_btn']}
-        </a>
-    </div>
-    """
-    st.sidebar.markdown(html_card, unsafe_allow_html=True)
+# J'enlève la fonction show_affiliate_sidebar pour l'instant
 
 def show_contextual_buttons(ticker):
     st.markdown("### 🛒 Action / Trade")
-    # La colonne c2 a été supprimée, l'espace sera partagé entre c1 et c3
-    c1, c2 = st.columns(2) 
     
-    # [LIEN 2 : ETORO] A REMPLACER PAR VOTRE CODE D'AFFILIATION
-    # Utilise le ticker dynamique
-    link_etoro = f"https://www.etoro.com/markets/{ticker.replace('.PA', '')}?ref=VOTRE_CODE_ETORO" 
-    
-    # [LIEN 4 : TRADINGVIEW] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION (160839)
-    link_tradingview = "https://fr.tradingview.com/?aff_id=160839" 
-    
-    # SVG Icone d'argent pour eToro
-    etoro_icon_svg = """
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="1" x2="12" y2="23"></line>
-        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-    </svg>
-    """
-    
-    # SVG Icone de graphique pour TradingView
-    tv_icon_svg = """
+    # SVG Icone de graphique pour TradingView (Corrigé pour affichage direct)
+    tv_icon_svg_data = """
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
     </svg>
     """
     
-    # Construction du HTML du bouton eToro
-    etoro_html = f"""
-    <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
-        <div style="border: 2px solid #a7f3d0; border-radius: 8px; padding: 15px; text-align: center; background: #ecfdf5; hover: bg-gray-50; display: flex; flex-direction: column; align-items: center;">
-            {etoro_icon_svg}
-            <span style="font-weight: bold; color: #065f46; margin-top: 5px;">eToro</span>
-            <span style="font-size: 12px; color: #10B981;">Commencez à trader avec 0% de commission!</span>
-        </div>
-    </a>
-    """
+    # [LIEN 4 : TRADINGVIEW] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION (160839)
+    link_tradingview = "https://fr.tradingview.com/?aff_id=160839" 
     
-    # Construction du HTML du bouton TradingView
-    tv_html = f"""
+    # Le bouton unique prend toute la largeur
+    st.markdown(f"""
     <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
-        <div style="border: 2px solid #60a5fa; border-radius: 8px; padding: 15px; text-align: center; background: #eff6ff; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); display: flex; flex-direction: column; align-items: center;">
-            {tv_icon_svg}
+        <div style="border: 2px solid #60a5fa; border-radius: 8px; padding: 15px; text-align: center; background: #eff6ff; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); display: flex; flex-direction: column; align-items: center; width: 100%;">
+            {tv_icon_svg_data}
             <span style="font-weight: bold; color: #1e40af; margin-top: 5px;">TradingView</span>
             <span style="font-size: 12px; color: #2563eb;">Accès Premium GRATUIT 30 Jours</span>
         </div>
     </a>
-    """
-    
-    with c1:
-        st.markdown(etoro_html, unsafe_allow_html=True)
-    
-    with c2:
-        st.markdown(tv_html, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 
-# Affichage des pubs sidebar
-show_affiliate_sidebar()
-show_adsense_sidebar()
+# J'enlève l'appel à show_affiliate_sidebar()
+show_adsense_sidebar() # L'appel à la pub AdSense reste dans la sidebar
 
 # --- MOTEUR INTELLIGENT (Fondamental) ---
 
