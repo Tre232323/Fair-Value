@@ -16,9 +16,28 @@ def inject_adsense_head():
     <!-- Balise de Vérification IMPACT SITE (Affiliation/Partenariat) -->
     <meta name='impact-site-verification' value='50d9a746-1376-4819-9331-960b659a868b'>
     
-    <!-- CSS pour masquer le pied de page 'Built with Streamlit' -->
+    <!-- CSS pour masquer la barre 'Built with Streamlit' (Solution plus agressive) -->
     <style>
-        footer {visibility: hidden;}
+        #MainMenu {visibility: hidden;} /* Cache le bouton de menu Streamlit */
+        footer {visibility: hidden;} /* Cache le pied de page général */
+        header {visibility: hidden;} /* Cache l'en-tête, souvent vide */
+        .st-emotion-cache-1cypcdb {visibility: hidden;} /* Cache la barre latérale spécifique */
+        .st-emotion-cache-cio0e1 {visibility: hidden;} /* Cache la barre latérale spécifique (variation) */
+        
+        /* Cible l'élément spécifique du pied de page Streamlit pour le retirer */
+        .st-emotion-cache-h5rgay > p:contains("Streamlit") {
+            display: none !important;
+        }
+        
+        /* Cible la barre spécifique qui contient "Made with Streamlit" */
+        [data-testid="stStatusWidget"] {
+            display: none !important;
+        }
+        /* Cache le bouton 'Déployer' ou 'Share' qui peut apparaître */
+        button[data-testid="baseButton-secondary"] {
+            display: none !important;
+        }
+
     </style>
     
     <div style="display:none;">Verification Tags Holder</div>
@@ -255,7 +274,6 @@ def show_contextual_buttons(ticker):
     """, unsafe_allow_html=True)
 
 
-# L'appel à show_affiliate_sidebar est retiré
 show_adsense_sidebar() # L'appel à la pub AdSense reste dans la sidebar
 
 # --- MOTEUR INTELLIGENT (Fondamental) ---
