@@ -264,11 +264,18 @@ def show_contextual_buttons(ticker):
     # [LIEN 4 : TRADINGVIEW] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION (160839)
     link_tradingview = "https://fr.tradingview.com/?aff_id=160839" 
     
+    # SVG Icone de graphique pour TradingView
+    tv_icon_svg = """
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+    </svg>
+    """
+    
     with c1:
         st.markdown(f"""
         <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
-            <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white; hover: bg-gray-50;">
-                <span style="font-weight: bold; color: #16a34a;">eToro</span><br>
+            <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white; hover: bg-gray-50; display: flex; flex-direction: column; align-items: center;">
+                <span style="font-weight: bold; color: #16a34a; margin-bottom: 5px;">eToro</span>
                 <span style="font-size: 12px; color: #4b5563;">Buy {ticker} (0% Comm)</span>
             </div>
         </a>
@@ -277,11 +284,13 @@ def show_contextual_buttons(ticker):
     # L'ancienne colonne c2 (IBKR) est supprimée
     
     with c2:
+        # Bloc TradingView mis en évidence
         st.markdown(f"""
         <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
-            <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
-                <span style="font-weight: bold; color: #2563eb;">TradingView</span><br>
-                <span style="font-size: 12px; color: #4b5563;">Analyse Graphique</span>
+            <div style="border: 2px solid #2563eb; border-radius: 8px; padding: 15px; text-align: center; background: #e0f2fe; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); display: flex; flex-direction: column; align-items: center;">
+                {tv_icon_svg}
+                <span style="font-weight: bold; color: #2563eb; margin-top: 5px;">TradingView</span>
+                <span style="font-size: 12px; color: #1e40af;">Analyse Graphique</span>
             </div>
         </a>
         """, unsafe_allow_html=True)
