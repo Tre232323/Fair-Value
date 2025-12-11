@@ -233,21 +233,17 @@ def show_adsense_banner():
 def show_contextual_buttons(ticker):
     st.markdown("### 🛒 Action / Trade")
     
-    # SVG Icone de graphique pour TradingView (Corrigé pour affichage direct)
-    tv_icon_svg_data = """
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-    </svg>
-    """
-    
     # [LIEN 4 : TRADINGVIEW] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION (160839)
     link_tradingview = "https://fr.tradingview.com/?aff_id=160839" 
+    
+    # Remplacement du SVG complexe par un EMOJI fiable
+    tv_icon_emoji = "📊"
     
     # Le bouton unique prend toute la largeur
     st.markdown(f"""
     <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
         <div style="border: 2px solid #60a5fa; border-radius: 8px; padding: 15px; text-align: center; background: #eff6ff; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2); display: flex; flex-direction: column; align-items: center; width: 100%;">
-            {tv_icon_svg_data}
+            <span style="font-size: 24px; line-height: 1;">{tv_icon_emoji}</span>
             <span style="font-weight: bold; color: #1e40af; margin-top: 5px;">TradingView</span>
             <span style="font-size: 12px; color: #2563eb;">Accès Premium GRATUIT 30 Jours</span>
         </div>
@@ -256,7 +252,7 @@ def show_contextual_buttons(ticker):
 
 
 # J'enlève l'appel à show_affiliate_sidebar()
-show_adsense_sidebar() # L'appel à la pub AdSense reste dans la sidebar
+# show_adsense_sidebar() # L'appel à la pub AdSense reste dans la sidebar
 
 # --- MOTEUR INTELLIGENT (Fondamental) ---
 
