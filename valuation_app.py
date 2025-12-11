@@ -5,8 +5,21 @@ import pandas as pd
 import numpy as np
 import requests
 
+# --- INJECTION DU CODE ADSENSE GLOBAL (POUR LA VALIDATION) ---
+# Ce code est injecté en haut de page (simule le <head>) pour la vérification du site par Google.
+def inject_adsense_head():
+    # VOUS DEVEZ UTILISER VOTRE CODE GLOBAL ADSENSE ICI
+    adsense_verification_script = """
+    <!-- Code Global AdSense : Ce script est indispensable pour la validation du site par Google. -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
+         crossorigin="anonymous"></script>
+    <div style="display:none;">AdSense Verification Tag</div>
+    """
+    components.html(adsense_verification_script, height=0, width=0)
+
 # Configuration de la page avec le nouveau nom de marque
 st.set_page_config(page_title="True Stock Price", layout="wide", page_icon="💰")
+inject_adsense_head()
 
 # --- GESTION DES LANGUES (INTERNATIONALISATION) ---
 lang_option = st.sidebar.selectbox(
@@ -167,16 +180,14 @@ enable_override = st.sidebar.checkbox(T['sb_override'])
 # --- SYSTÈME DE PUBLICITÉ (ADSENSE) ---
 def show_adsense_sidebar():
     st.sidebar.markdown("---")
-    st.sidebar.caption("Publicité")
-    # Note : Le code ci-dessous est un placeholder.
-    # Une fois votre domaine validé par Google, remplacez les "ca-pub-XXXXXXXXXXXXXXXX" par vos vrais IDs.
+    st.sidebar.caption("Ad / Publicité")
+    # Slot ID par défaut, sera mis à jour après la validation AdSense
     adsense_code = """
     <div style="text-align: center; width: 100%;">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-             crossorigin="anonymous"></script>
+        <!-- Bloc Sidebar (Carré) -->
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-client="ca-pub-5805757737293445" 
              data-ad-slot="1234567890" 
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
@@ -192,14 +203,14 @@ def show_adsense_sidebar():
 
 def show_adsense_banner():
     st.markdown("---")
-    st.caption("Publicité")
+    st.caption("Ad / Publicité")
+    # Slot ID par défaut, sera mis à jour après la validation AdSense
     adsense_code = """
     <div style="text-align: center; width: 100%;">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-             crossorigin="anonymous"></script>
+        <!-- Bloc Bannière (Bas) -->
         <ins class="adsbygoogle"
              style="display:block"
-             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-client="ca-pub-5805757737293445"
              data-ad-slot="0987654321"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
@@ -218,13 +229,13 @@ def show_affiliate_sidebar():
     st.sidebar.markdown("---")
     st.sidebar.markdown(f"### 🏆 {T['ad_broker_title']}")
     
-    # LIEN D'AFFILIATION A REMPLACER ICI
-    affiliate_link = "https://www.traderepublic.com" # Remplacez par votre vrai lien !
+    # [LIEN 1 : TRADE REPUBLIC] MODIFIEZ CE LIEN PAR VOTRE LIEN PARTENAIRE TRADE REPUBLIC
+    affiliate_link = "https://traderepublic.com/?ref=VOTRE_CODE_TR" 
     
     html_card = f"""
     <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
         <div style="font-size: 28px; margin-bottom: 8px;">📈</div>
-        <h4 style="margin: 0; color: #0f172a; font-size: 16px; font-weight: 700;">Trade Republic</h4>
+        <h4 style="margin: 0; color: #0f172a; font-size: 16px; font-weight: 700;'>Trade Republic</h4>
         <p style="font-size: 12px; color: #64748b; margin: 8px 0 16px 0;">{T['ad_broker_desc']}</p>
         
         <div style="background-color: #dcfce7; border: 1px solid #86efac; border-radius: 6px; padding: 6px; margin-bottom: 12px;">
@@ -242,10 +253,15 @@ def show_contextual_buttons(ticker):
     st.markdown("### 🛒 Action / Trade")
     c1, c2, c3 = st.columns(3)
     
-    # LIENS D'AFFILIATION A REMPLACER ICI
-    link_etoro = f"https://www.etoro.com/markets/{ticker.replace('.PA', '')}" # Ajouter ?ref=...
-    link_ibkr = "https://www.interactivebrokers.com" # Votre lien partenaire
-    link_tradingview = "https://fr.tradingview.com/" # Votre lien partenaire
+    # [LIEN 2 : ETORO] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION
+    # Utilise le ticker dynamique
+    link_etoro = f"https://www.etoro.com/markets/{ticker.replace('.PA', '')}?ref=VOTRE_CODE_ETORO" 
+    
+    # [LIEN 3 : INTERACTIVE BROKERS (IBKR)] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION
+    link_ibkr = "https://www.interactivebrokers.com/mkt/referral-landing?partnerID=VOTRE_CODE_IBKR" 
+    
+    # [LIEN 4 : TRADINGVIEW] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION
+    link_tradingview = "https://fr.tradingview.com/?aff=VOTRE_CODE_TV" 
     
     c1.markdown(f"""
     <a href="{link_etoro}" target="_blank" style="text-decoration: none;">
@@ -259,8 +275,8 @@ def show_contextual_buttons(ticker):
     c2.markdown(f"""
     <a href="{link_ibkr}" target="_blank" style="text-decoration: none;">
         <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
-            <span style="font-weight: bold; color: #ea580c;">Interactive Brokers</span><br>
-            <span style="font-size: 12px; color: #4b5563;">Buy {ticker} (Pro)</span>
+            <span style="font-weight: bold; color: #ea580c;">Interactive Brokers (IBKR)</span><br>
+            <span style="font-size: 12px; color: #4b5563;">Trader {ticker} (Pro)</span>
         </div>
     </a>
     """, unsafe_allow_html=True)
@@ -269,7 +285,7 @@ def show_contextual_buttons(ticker):
     <a href="{link_tradingview}" target="_blank" style="text-decoration: none;">
         <div style="border: 1px solid #d1d5db; border-radius: 8px; padding: 15px; text-align: center; background: white;">
             <span style="font-weight: bold; color: #2563eb;">TradingView</span><br>
-            <span style="font-size: 12px; color: #4b5563;">Advanced Chart</span>
+            <span style="font-size: 12px; color: #4b5563;">Analyse Graphique</span>
         </div>
     </a>
     """, unsafe_allow_html=True)
