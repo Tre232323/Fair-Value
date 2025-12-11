@@ -8,7 +8,7 @@ import requests
 # --- INJECTION DU CODE ADSENSE GLOBAL (POUR LA VALIDATION) ---
 # Ce code est injecté en haut de page (simule le <head>) pour la vérification du site par Google.
 def inject_adsense_head():
-    # VOUS DEVEZ UTILISER VOTRE CODE GLOBAL ADSENSE ICI
+    # VOUS DEVEVEZ UTILISER VOTRE CODE GLOBAL ADSENSE ICI
     adsense_verification_script = """
     <!-- Code Global AdSense : Ce script est indispensable pour la validation du site par Google. -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
@@ -229,8 +229,8 @@ def show_affiliate_sidebar():
     st.sidebar.markdown("---")
     st.sidebar.markdown(f"### 🏆 {T['ad_broker_title']}")
     
-    # [LIEN 1 : TRADE REPUBLIC] MODIFIEZ CE LIEN PAR VOTRE LIEN PARTENAIRE TRADE REPUBLIC
-    affiliate_link = "https://traderepublic.com/?ref=VOTRE_CODE_TR" 
+    # [LIEN 1 : TRADE REPUBLIC] VOTRE CODE EST INTEGRE ICI
+    affiliate_link = "https://traderepublic.com/?ref=TR_BEST_OFFER" 
     
     html_card = f"""
     <div style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
@@ -253,14 +253,15 @@ def show_contextual_buttons(ticker):
     st.markdown("### 🛒 Action / Trade")
     c1, c2, c3 = st.columns(3)
     
-    # [LIEN 2 : ETORO] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION
+    # [LIEN 2 : ETORO] A REMPLACER PAR VOTRE CODE D'AFFILIATION
     # Utilise le ticker dynamique
     link_etoro = f"https://www.etoro.com/markets/{ticker.replace('.PA', '')}?ref=VOTRE_CODE_ETORO" 
     
-    # [LIEN 3 : INTERACTIVE BROKERS (IBKR)] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION
-    link_ibkr = "https://www.interactivebrokers.com/mkt/referral-landing?partnerID=VOTRE_CODE_IBKR" 
+    # [LIEN 3 : INTERACTIVE BROKERS (IBKR)] CODE INTEGRE AVEC VOTRE ID edison546
+    # Le lien complet est utilisé pour s'assurer que le parrainage est crédité.
+    link_ibkr = "https://ibkr.com/referral/edison546" 
     
-    # [LIEN 4 : TRADINGVIEW] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION
+    # [LIEN 4 : TRADINGVIEW] A REMPLACER PAR VOTRE CODE D'AFFILIATION
     link_tradingview = "https://fr.tradingview.com/?aff=VOTRE_CODE_TV" 
     
     c1.markdown(f"""
