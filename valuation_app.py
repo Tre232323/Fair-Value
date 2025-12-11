@@ -104,7 +104,7 @@ Do your own due diligence. The publisher assumes no responsibility.""",
         "sig_tech": "Technical Signal:",
         "sig_buy": "GREEN LIGHT",
         "sig_sell": "RED LIGHT",
-        "sig_neutral": "NEUTRAL",
+        "sig_neutral": "NEUTRE",
         "desc_company": "📝 Company Description",
         "analysis_complete": "Analysis complete for",
         "err_data": "Insufficient data or negative cash flows.",
@@ -261,8 +261,8 @@ def show_contextual_buttons(ticker):
     # Utilise le ticker dynamique
     link_etoro = f"https://www.etoro.com/markets/{ticker.replace('.PA', '')}?ref=VOTRE_CODE_ETORO" 
     
-    # [LIEN 4 : TRADINGVIEW] A REMPLACER PAR VOTRE CODE D'AFFILIATION
-    link_tradingview = "https://fr.tradingview.com/?aff=VOTRE_CODE_TV" 
+    # [LIEN 4 : TRADINGVIEW] MODIFIEZ CE LIEN AVEC VOTRE CODE D'AFFILIATION (160839)
+    link_tradingview = "https://fr.tradingview.com/?aff_id=160839" 
     
     with c1:
         st.markdown(f"""
