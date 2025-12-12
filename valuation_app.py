@@ -13,30 +13,40 @@ st.set_page_config(page_title="True Stock Price", layout="wide", page_icon="💰
 def inject_css():
     hide_streamlit_style = """
         <style>
-        /* Masque le menu hamburger (3 traits) en haut à droite */
+        /* Masque le menu hamburger (3 traits) */
         #MainMenu {visibility: hidden !important; display: none !important;}
         
         /* Masque le pied de page 'Built with Streamlit' */
-        footer {visibility: hidden !important; display: none !important;}
+        footer {visibility: hidden !important; display: none !important; height: 0px !important;}
         
-        /* Masque le header coloré en haut */
+        /* Masque le header coloré et la nav bar */
         header {visibility: hidden !important; display: none !important;}
         
         /* Masque la barre d'outils flottante (avec les options plein écran, etc.) */
         [data-testid="stToolbar"] {visibility: hidden !important; display: none !important;}
         
-        /* Masque le bouton 'Deploy' si vous êtes le développeur */
+        /* Masque le bouton 'Deploy' */
         .stDeployButton {display:none !important;}
         
-        /* Masque les décorations de la barre d'état */
+        /* Masque les décorations de la barre d'état et le Viewer Badge potentiel */
         [data-testid="stStatusWidget"] {visibility: hidden !important; display: none !important;}
+        [data-testid="stDecoration"] {visibility: hidden !important; display: none !important;}
         
-        /* Masque le bouton plein écran sur les images/plots s'il apparaît en overlay global */
+        /* Masque le bouton plein écran sur les images/plots */
         button[title="View fullscreen"] {visibility: hidden !important; display: none !important;}
-
-        /* Ajuste les marges pour remonter le contenu puisque le header est caché */
+        
+        /* Tente de masquer le badge "Viewer" spécifique au Cloud en bas à droite */
+        .viewerBadge_container__1QSob {display: none !important;}
+        
+        /* Ajuste les marges pour remonter le contenu au maximum */
         .block-container {
-            padding-top: 1rem !important;
+            padding-top: 0rem !important;
+            padding-bottom: 0rem !important;
+        }
+        
+        /* Force la suppression de tout élément fixe en bas de page */
+        div[style*="position: fixed"][style*="bottom: 0"] {
+            display: none !important;
         }
         </style>
     """
