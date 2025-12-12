@@ -14,26 +14,29 @@ def inject_css():
     hide_streamlit_style = """
         <style>
         /* Masque le menu hamburger (3 traits) en haut à droite */
-        #MainMenu {visibility: hidden;}
+        #MainMenu {visibility: hidden !important; display: none !important;}
         
         /* Masque le pied de page 'Built with Streamlit' */
-        footer {visibility: hidden;}
+        footer {visibility: hidden !important; display: none !important;}
         
         /* Masque le header coloré en haut */
-        header {visibility: hidden;}
+        header {visibility: hidden !important; display: none !important;}
         
         /* Masque la barre d'outils flottante (avec les options plein écran, etc.) */
-        [data-testid="stToolbar"] {visibility: hidden; display: none;}
+        [data-testid="stToolbar"] {visibility: hidden !important; display: none !important;}
         
         /* Masque le bouton 'Deploy' si vous êtes le développeur */
-        .stDeployButton {display:none;}
+        .stDeployButton {display:none !important;}
         
         /* Masque les décorations de la barre d'état */
-        [data-testid="stStatusWidget"] {display: none;}
+        [data-testid="stStatusWidget"] {visibility: hidden !important; display: none !important;}
         
+        /* Masque le bouton plein écran sur les images/plots s'il apparaît en overlay global */
+        button[title="View fullscreen"] {visibility: hidden !important; display: none !important;}
+
         /* Ajuste les marges pour remonter le contenu puisque le header est caché */
         .block-container {
-            padding-top: 1rem;
+            padding-top: 1rem !important;
         }
         </style>
     """
