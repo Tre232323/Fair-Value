@@ -5,57 +5,56 @@ import pandas as pd
 import numpy as np
 import requests
 
-# --- INJECTION DU CODE ADSENSE GLOBAL, BALISES & STYLES ---
-# Ce code est injecté en haut de page (simule le <head>) pour la vérification du site et pour masquer le pied de page Streamlit.
-def inject_adsense_head():
-    full_injection_script = """
+# Configuration de la page (DOIT être la première commande Streamlit)
+st.set_page_config(page_title="True Stock Price", layout="wide", page_icon="💰")
+
+# --- INJECTION DU CODE CSS (STYLE) ---
+# Cette fonction injecte le CSS directement dans la page principale pour masquer les éléments indésirables.
+def inject_css():
+    hide_streamlit_style = """
+        <style>
+        /* Masque le menu hamburger (3 traits) en haut à droite */
+        #MainMenu {visibility: hidden;}
+        
+        /* Masque le pied de page 'Built with Streamlit' */
+        footer {visibility: hidden;}
+        
+        /* Masque le header coloré en haut */
+        header {visibility: hidden;}
+        
+        /* Masque la barre d'outils flottante (avec les options plein écran, etc.) */
+        [data-testid="stToolbar"] {visibility: hidden; display: none;}
+        
+        /* Masque le bouton 'Deploy' si vous êtes le développeur */
+        .stDeployButton {display:none;}
+        
+        /* Masque les décorations de la barre d'état */
+        [data-testid="stStatusWidget"] {display: none;}
+        
+        /* Ajuste les marges pour remonter le contenu puisque le header est caché */
+        .block-container {
+            padding-top: 1rem;
+        }
+        </style>
+    """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# --- INJECTION DU CODE ADSENSE & SCRIPTS ---
+# Les scripts JS restent dans components.html car ils nécessitent souvent une exécution spécifique
+def inject_adsense_scripts():
+    scripts = """
     <!-- Code Global AdSense (Validation Google) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5805757737293445"
          crossorigin="anonymous"></script>
-    
-    <!-- Balise de Vérification IMPACT SITE (Affiliation/Partenariat) -->
+     
+    <!-- Balise de Vérification IMPACT SITE -->
     <meta name='impact-site-verification' value='50d9a746-1376-4819-9331-960b659a868b'>
-    
-    <!-- CSS pour masquer la barre 'Built with Streamlit' et les boutons de contrôle -->
-    <style>
-        /* Masque le menu principal (trois points) */
-        #MainMenu {visibility: hidden !important;} 
-        
-        /* Masque le pied de page 'Built with Streamlit' (Solution la plus robuste) */
-        footer {
-            visibility: hidden !important;
-            display: none !important;
-            height: 0px !important;
-        } 
-        
-        /* Masque l'en-tête */
-        header {visibility: hidden !important;} 
-
-        /* Solution la plus fiable pour masquer la barre flottante Plein Écran/Partage */
-        [data-testid="stToolbar"] {
-            visibility: hidden !important;
-            display: none !important;
-        }
-        
-        /* Masque le widget de statut Streamlit (où le texte est souvent inséré, y compris le fullscreen) */
-        [data-testid="stStatusWidget"] {
-            display: none !important;
-        }
-        
-        /* Masque les boutons d'action flottants (y compris le bouton plein écran en bas à droite) */
-        [data-testid="stActionButton"] {
-            display: none !important;
-        }
-
-    </style>
-    
-    <div style="display:none;">Verification Tags Holder</div>
     """
-    components.html(full_injection_script, height=0, width=0)
+    components.html(scripts, height=0, width=0)
 
-# Configuration de la page avec le nouveau nom de marque
-st.set_page_config(page_title="True Stock Price", layout="wide", page_icon="💰")
-inject_adsense_head()
+# Appel des fonctions d'injection
+inject_css()
+inject_adsense_scripts()
 
 # --- GESTION DES LANGUES (INTERNATIONALISATION) ---
 lang_option = st.sidebar.selectbox(
